@@ -1,0 +1,41 @@
+type: "orchestration"
+version: "1.0"
+pipeline:
+  components:
+    Start:
+      type: "start"
+      transitions:
+        unconditional:
+        - "Python Pushdown"
+      parameters:
+        componentName: "Start"
+    Python Pushdown:
+      type: "python-pushdown"
+      parameters:
+        componentName: "Python Pushdown"
+        externalAccessIntegrations:
+        packages:
+        pythonScript: |-
+          ###
+          # Variables are directly accessible:
+          #   print (myvar)
+          # Updating a variable:
+          #   context.updateVariable('myvar', 'new-value')
+          # Updating a grid variable:
+          #   context.updateGridVariable('mygridvar',[['list','of'],['lists','!']])
+          ###)
+
+          print("Hello World")
+        scriptTimeout: "360"
+design:
+  components:
+    Start:
+      position:
+        x: 0
+        "y": 0
+      tempMetlId: 1
+    Python Pushdown:
+      position:
+        x: 110
+        "y": 0
+      tempMetlId: 2
